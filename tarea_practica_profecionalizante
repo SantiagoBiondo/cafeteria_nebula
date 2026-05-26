@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Estudiantes — Nebula Café · PP2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Syne', sans-serif;
+    background: #f5f4f0;
+    color: #1a1a1a;
+    padding: 2rem 1rem;
+    min-height: 100vh;
+  }
+
+  .guide {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* HERO */
+  .hero {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 2.5rem 2rem 2rem;
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(127,119,221,0.2);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 80px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(29,158,117,0.18);
+  }
+  .hero-tag {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #9F9FE2;
+    margin-bottom: 0.6rem;
+  }
+  .hero h1 {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 0.4rem;
+    position: relative;
+    z-index: 1;
+  }
+  .hero h1 span { color: #5DCAA5; }
+  .hero-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 10px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-badge {
+    font-size: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 5px 14px;
+    border-radius: 20px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  /* TIMELINE */
+  .timeline {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border: 1px solid #dddbd4;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .tl-item {
+    flex: 1;
+    padding: 14px 16px;
+    border-right: 1px solid #dddbd4;
+    background: #fff;
+  }
+  .tl-item:last-child { border-right: none; }
+  .tl-num { font-size: 24px; font-weight: 800; color: #7F77DD; line-height: 1; }
+  .tl-label { font-size: 10px; color: #888; margin-top: 2px; text-transform: uppercase; letter-spacing: 1px; }
+  .tl-title { font-size: 12px; font-weight: 600; margin-top: 5px; }
+
+  /* PARTS */
+  .part {
+    border: 1px solid #dddbd4;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: #fff;
+  }
+  .part-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-bottom: 1px solid #dddbd4;
+  }
+  .part-num {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700;
+    flex-shrink: 0;
+  }
+  .p1 .part-num { background: #EEEDFE; color: #3C3489; }
+  .p2 .part-num { background: #E1F5EE; color: #085041; }
+  .p3 .part-num { background: #FAEEDA; color: #633806; }
+  .part-header-info h2 { font-size: 16px; font-weight: 700; }
+  .part-header-info p { font-size: 12px; color: #666; margin-top: 2px; }
+  .part-time {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid #dddbd4;
+    color: #666;
+    white-space: nowrap;
+  }
+
+  .part-body { padding: 20px; }
+
+  .objective-box {
+    background: #f5f4f0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #444;
+    border-left: 3px solid #7F77DD;
+    line-height: 1.6;
+  }
+  .p2 .objective-box { border-left-color: #1D9E75; }
+  .p3 .objective-box { border-left-color: #BA7517; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 10px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .step-card {
+    border: 1px solid #dddbd4;
+    border-radius: 8px;
+    padding: 10px 14px;
+  }
+  .step-num-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+  .step-text { font-size: 13px; font-weight: 500; }
+
+  .q-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 16px;
+  }
+  .q-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .q-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #7F77DD;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+
+  .deliverable-box {
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+  }
+  .p1 .deliverable-box { background: #EEEDFE; }
+  .p2 .deliverable-box { background: #E1F5EE; }
+  .p3 .deliverable-box { background: #FAEEDA; }
+  .deliverable-box strong {
+    display: block;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .p1 .deliverable-box strong { color: #3C3489; }
+  .p2 .deliverable-box strong { color: #085041; }
+  .p3 .deliverable-box strong { color: #633806; }
+  .deliverable-box ul { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .deliverable-box li::before { content: '→ '; }
+  .p1 .deliverable-box li { color: #534AB7; }
+  .p2 .deliverable-box li { color: #0F6E56; }
+  .p3 .deliverable-box li { color: #854F0B; }
+
+  .code-block {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    background: #1a1a2e;
+    color: #A8B3D1;
+    padding: 16px 18px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    line-height: 1.8;
+    overflow-x: auto;
+  }
+  .code-block .cmd { color: #5DCAA5; }
+  .code-block .comment { color: #3d4a6b; }
+  .code-block .kw { color: #9F9FE2; }
+  .code-block .str { color: #FAC775; }
+
+  .role-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+  .role-card {
+    border: 1px solid #dddbd4;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .role-title { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #999; margin-bottom: 4px; }
+  .role-desc { font-size: 14px; font-weight: 600; }
+  .role-file { font-family: 'DM Mono', monospace; font-size: 11px; color: #888; margin-top: 5px; }
+
+  .branch-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .branch-chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid;
+  }
+  .branch-main { background: #EEEDFE; color: #534AB7; border-color: #AFA9EC; }
+  .branch-feat { background: #E1F5EE; color: #0F6E56; border-color: #5DCAA5; }
+
+  .alert-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background: #FAEEDA;
+    color: #854F0B;
+    border: 1px solid #FAC775;
+    margin-bottom: 14px;
+  }
+
+  /* SQL TABLES */
+  .tables-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .table-card {
+    border: 1px solid #dddbd4;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .table-card-title {
+    padding: 7px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    background: #f5f4f0;
+    border-bottom: 1px solid #dddbd4;
+  }
+  .sql-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .sql-table th {
+    padding: 6px 10px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    color: #888;
+    border-bottom: 1px solid #dddbd4;
+    background: #fafafa;
+  }
+  .sql-table td { padding: 6px 10px; border-bottom: 1px solid #eee; font-family: 'DM Mono', monospace; }
+  .sql-table tr:last-child td { border-bottom: none; }
+  .tag-pk { font-size: 9px; background: #EEEDFE; color: #534AB7; padding: 1px 5px; border-radius: 3px; font-family: 'DM Mono', monospace; }
+  .tag-fk { font-size: 9px; background: #E1F5EE; color: #0F6E56; padding: 1px 5px; border-radius: 3px; font-family: 'DM Mono', monospace; }
+
+  /* SCORING */
+  .scoring {
+    border: 1px solid #dddbd4;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: #fff;
+  }
+  .scoring-header {
+    padding: 14px 20px;
+    background: #f5f4f0;
+    border-bottom: 1px solid #dddbd4;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .score-row {
+    display: flex;
+    align-items: center;
+    padding: 11px 20px;
+    border-bottom: 1px solid #f0efea;
+    gap: 14px;
+  }
+  .score-row:last-child { border-bottom: none; }
+  .score-name { font-size: 13px; flex: 1; }
+  .score-bar-wrap { flex: 2; height: 6px; background: #f0efea; border-radius: 3px; overflow: hidden; }
+  .score-bar { height: 100%; border-radius: 3px; background: #7F77DD; }
+  .score-pts { font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500; color: #666; min-width: 36px; text-align: right; }
+
+  /* BONUS */
+  .bonus-box {
+    border: 1px dashed #c9c7be;
+    border-radius: 14px;
+    padding: 16px 20px;
+    margin-bottom: 1rem;
+    background: #fff;
+  }
+  .bonus-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 12px;
+  }
+  .bonus-items { display: flex; flex-wrap: wrap; gap: 7px; }
+  .bonus-chip {
+    font-size: 12px;
+    padding: 5px 14px;
+    border: 1px solid #dddbd4;
+    border-radius: 20px;
+    background: #f5f4f0;
+  }
+
+  /* QUOTE */
+  .quote-box {
+    background: #1a1a2e;
+    color: rgba(255,255,255,0.85);
+    border-radius: 14px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .quote-text { font-size: 16px; font-style: italic; line-height: 1.7; margin-bottom: 10px; }
+  .quote-author { font-size: 11px; color: rgba(255,255,255,0.35); letter-spacing: 1.5px; text-transform: uppercase; }
+
+  @media print {
+    body { background: #fff; padding: 0; }
+    .part, .scoring, .bonus-box { page-break-inside: avoid; }
+  }
+
+  @media (max-width: 560px) {
+    .timeline { flex-wrap: wrap; }
+    .tl-item { border-right: none; border-bottom: 1px solid #dddbd4; }
+    .steps-grid, .role-cards, .tables-grid { grid-template-columns: 1fr; }
+    .hero-meta { gap: 8px; }
+  }
+</style>
+</head>
+<body>
+<div class="guide">
+
+  <div class="hero">
+    <p class="hero-tag">Práctica Profesionalizante II</p>
+    <h1>Nebula Café<br><span>Sistema de pedidos</span></h1>
+    <p class="hero-sub">Simulación real de cliente · Git · SQLite</p>
+    <div class="hero-meta">
+      <span class="hero-badge">⏱ 2 horas</span>
+      <span class="hero-badge">👥 Grupos de 2 o 3</span>
+      <span class="hero-badge">🏅 100 pts</span>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-num">30'</div>
+      <div class="tl-label">parte 1</div>
+      <div class="tl-title">Cliente</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-num">35'</div>
+      <div class="tl-label">parte 2</div>
+      <div class="tl-title">Git</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-num">45'</div>
+      <div class="tl-label">parte 3</div>
+      <div class="tl-title">SQLite</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-num">10'</div>
+      <div class="tl-label">cierre</div>
+      <div class="tl-title">Exposición</div>
+    </div>
+  </div>
+
+  <!-- PARTE 1 -->
+  <div class="part p1">
+    <div class="part-header">
+      <div class="part-num">1</div>
+      <div class="part-header-info">
+        <h2>Simulación con el cliente</h2>
+        <p>Comunicación profesional y relevamiento</p>
+      </div>
+      <span class="part-time">30 min</span>
+    </div>
+    <div class="part-body">
+      <div class="objective-box">
+        Uno del grupo hace de <strong>cliente</strong> (lee la ficha que da el profesor). El resto es el <strong>equipo de desarrollo</strong>. Luego rotan.
+      </div>
+
+      <p class="section-label">Contexto del negocio</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num-label">negocio</div>
+          <div class="step-text">Nebula Café — 2 empleados</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num-label">problema</div>
+          <div class="step-text">Pedidos en papel, se pierden frecuentemente</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num-label">necesitan</div>
+          <div class="step-text">Registrar clientes, productos, pedidos y fechas</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num-label">restricción</div>
+          <div class="step-text">Solución simple, bajo costo</div>
+        </div>
+      </div>
+
+      <p class="section-label">Preguntas que deben hacer</p>
+      <div class="q-list">
+        <div class="q-item"><div class="q-dot"></div><span>¿Qué información necesitan guardar?</span></div>
+        <div class="q-item"><div class="q-dot"></div><span>¿Quién va a usar el sistema?</span></div>
+        <div class="q-item"><div class="q-dot"></div><span>¿Cuántos pedidos manejan por día?</span></div>
+        <div class="q-item"><div class="q-dot"></div><span>¿Qué pasa si un pedido se cancela?</span></div>
+        <div class="q-item"><div class="q-dot"></div><span>¿Qué funcionalidades son prioritarias?</span></div>
+        <div class="q-item"><div class="q-dot"></div><span>¿Necesitan historial o reportes?</span></div>
+      </div>
+
+      <div class="deliverable-box">
+        <strong>Entregable — mini relevamiento</strong>
+        <ul>
+          <li>Problema principal detectado</li>
+          <li>Necesidades del cliente</li>
+          <li>Funcionalidades mínimas</li>
+          <li>Posibles mejoras futuras</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTE 2 -->
+  <div class="part p2">
+    <div class="part-header">
+      <div class="part-num">2</div>
+      <div class="part-header-info">
+        <h2>Organización con Git</h2>
+        <p>Flujo de trabajo profesional</p>
+      </div>
+      <span class="part-time">35 min</span>
+    </div>
+    <div class="part-body">
+      <div class="objective-box">
+        Crear el repositorio, organizar la estructura de carpetas y trabajar en ramas separadas.
+      </div>
+
+      <p class="section-label">Estructura del proyecto</p>
+      <div class="code-block">
+<span class="comment"># 1. Crear e inicializar</span>
+<span class="cmd">mkdir</span> pp2-nebula-cafe
+<span class="cmd">cd</span> pp2-nebula-cafe
+<span class="cmd">git init</span>
+
+<span class="comment"># 2. Estructura de carpetas</span>
+pp2-nebula-cafe/
+├── database/
+├── docs/
+├── src/
+└── README.md
+      </div>
+
+      <p class="section-label">Ramas de trabajo</p>
+      <div class="branch-row">
+        <span class="branch-chip branch-main">main</span>
+        <span class="branch-chip branch-feat">feature/database</span>
+        <span class="branch-chip branch-feat">feature/documentacion</span>
+      </div>
+
+      <p class="section-label">Roles por integrante</p>
+      <div class="role-cards">
+        <div class="role-card">
+          <div class="role-title">Integrante 1</div>
+          <div class="role-desc">Documentación</div>
+          <div class="role-file">docs/relevamiento.md</div>
+        </div>
+        <div class="role-card">
+          <div class="role-title">Integrante 2</div>
+          <div class="role-desc">Base de datos</div>
+          <div class="role-file">database/schema.sql</div>
+        </div>
+      </div>
+
+      <p class="section-label">Comandos mínimos esperados</p>
+      <div class="code-block">
+<span class="cmd">git checkout</span> -b feature/database
+<span class="cmd">git add</span> .
+<span class="cmd">git commit</span> -m <span class="str">"Creacion de estructura de base de datos"</span>
+<span class="cmd">git push</span>
+      </div>
+
+      <div class="alert-chip">
+        ⚠️ El profesor puede crear conflictos deliberados para que practiquen merge
+      </div>
+
+      <div class="deliverable-box">
+        <strong>Entregable — repositorio</strong>
+        <ul>
+          <li>Commits con mensajes claros</li>
+          <li>Ramas separadas por funcionalidad</li>
+          <li>README con descripción del proyecto</li>
+          <li>Archivos organizados en carpetas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARTE 3 -->
+  <div class="part p3">
+    <div class="part-header">
+      <div class="part-num">3</div>
+      <div class="part-header-info">
+        <h2>Diseño con SQLite</h2>
+        <p>Modelo de datos y consultas</p>
+      </div>
+      <span class="part-time">45 min</span>
+    </div>
+    <div class="part-body">
+      <div class="objective-box">
+        Crear las tablas con PRIMARY KEY y FOREIGN KEY, insertar datos de prueba y escribir las consultas solicitadas.
+      </div>
+
+      <p class="section-label">Modelo de datos</p>
+      <div class="tables-grid">
+        <div class="table-card">
+          <div class="table-card-title">clientes</div>
+          <table class="sql-table">
+            <tr><th>campo</th><th>tipo</th></tr>
+            <tr><td>id <span class="tag-pk">PK</span></td><td>INTEGER</td></tr>
+            <tr><td>nombre</td><td>TEXT</td></tr>
+            <tr><td>telefono</td><td>TEXT</td></tr>
+          </table>
+        </div>
+        <div class="table-card">
+          <div class="table-card-title">productos</div>
+          <table class="sql-table">
+            <tr><th>campo</th><th>tipo</th></tr>
+            <tr><td>id <span class="tag-pk">PK</span></td><td>INTEGER</td></tr>
+            <tr><td>nombre</td><td>TEXT</td></tr>
+            <tr><td>precio</td><td>REAL</td></tr>
+          </table>
+        </div>
+        <div class="table-card">
+          <div class="table-card-title">pedidos</div>
+          <table class="sql-table">
+            <tr><th>campo</th><th>tipo</th></tr>
+            <tr><td>id <span class="tag-pk">PK</span></td><td>INTEGER</td></tr>
+            <tr><td>cliente_id <span class="tag-fk">FK</span></td><td>INTEGER</td></tr>
+            <tr><td>fecha</td><td>TEXT</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <p class="section-label">Datos a insertar</p>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num-label">clientes</div>
+          <div class="step-text">Insertar 3 clientes</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num-label">productos</div>
+          <div class="step-text">Insertar 5 productos</div>
+        </div>
+        <div class="step-card" style="grid-column: span 2">
+          <div class="step-num-label">pedidos</div>
+          <div class="step-text">Insertar 4 pedidos con sus cliente_id</div>
+        </div>
+      </div>
+
+      <p class="section-label">Consultas obligatorias</p>
+      <div class="code-block">
+<span class="comment">-- Todos los clientes</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> clientes;
+
+<span class="comment">-- Productos ordenados por precio</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> productos
+<span class="kw">ORDER BY</span> precio <span class="kw">DESC</span>;
+
+<span class="comment">-- Pedidos con nombre del cliente (JOIN)</span>
+<span class="kw">SELECT</span> pedidos.id, clientes.nombre, pedidos.fecha
+<span class="kw">FROM</span> pedidos
+<span class="kw">JOIN</span> clientes <span class="kw">ON</span> pedidos.cliente_id = clientes.id;
+      </div>
+
+      <p class="section-label">Desafío extra</p>
+      <div class="code-block">
+<span class="comment">-- Cliente con más pedidos</span>
+<span class="kw">SELECT</span> clientes.nombre, <span class="kw">COUNT</span>(*) <span class="kw">AS</span> total
+<span class="kw">FROM</span> pedidos
+<span class="kw">JOIN</span> clientes <span class="kw">ON</span> pedidos.cliente_id = clientes.id
+<span class="kw">GROUP BY</span> clientes.id
+<span class="kw">ORDER BY</span> total <span class="kw">DESC</span>
+<span class="kw">LIMIT</span> 1;
+      </div>
+
+      <div class="deliverable-box">
+        <strong>Entregable — base de datos</strong>
+        <ul>
+          <li>Tablas con PRIMARY KEY y FOREIGN KEY</li>
+          <li>NOT NULL donde corresponda</li>
+          <li>Datos de prueba insertados</li>
+          <li>Las 3 consultas funcionando</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORING -->
+  <div class="scoring">
+    <div class="scoring-header">Criterios de evaluación</div>
+    <div class="score-row">
+      <span class="score-name">Comunicación profesional</span>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:100%"></div></div>
+      <span class="score-pts">25 pts</span>
+    </div>
+    <div class="score-row">
+      <span class="score-name">Relevamiento correcto</span>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:80%"></div></div>
+      <span class="score-pts">20 pts</span>
+    </div>
+    <div class="score-row">
+      <span class="score-name">Uso de Git</span>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:80%"></div></div>
+      <span class="score-pts">20 pts</span>
+    </div>
+    <div class="score-row">
+      <span class="score-name">Diseño SQL</span>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:60%"></div></div>
+      <span class="score-pts">15 pts</span>
+    </div>
+    <div class="score-row">
+      <span class="score-name">Organización del proyecto</span>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:40%"></div></div>
+      <span class="score-pts">10 pts</span>
+    </div>
+    <div class="score-row">
+      <span class="score-name">Consultas funcionales</span>
+      <div class="score-bar-wrap"><div class="score-bar" style="width:40%"></div></div>
+      <span class="score-pts">10 pts</span>
+    </div>
+  </div>
+
+  <!-- BONUS -->
+  <div class="bonus-box">
+    <div class="bonus-title">⭐ Bonus si terminan antes</div>
+    <div class="bonus-items">
+      <span class="bonus-chip">Diagrama entidad-relación</span>
+      <span class="bonus-chip">Tabla detalle_pedido</span>
+      <span class="bonus-chip">Issues en GitHub</span>
+      <span class="bonus-chip">Mockup del sistema</span>
+    </div>
+  </div>
+
+  <!-- QUOTE -->
+  <div class="quote-box">
+    <p class="quote-text">"Un sistema mal programado se arregla.<br>Un sistema mal entendido nace roto."</p>
+    <p class="quote-author">Bienvenidos al mundo real del desarrollo</p>
+  </div>
+
+</div>
+</body>
+</html>
